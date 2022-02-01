@@ -1,6 +1,5 @@
 import { ContainerReviewsCard } from "./ReviewsCard.styled";
-import FormReview from "./ReviewForm";
-import Review, { Reviewer } from "./Review";
+import Review from "./Review";
 import { IReview } from "../../@types/products.types";
 
 interface Iprops {
