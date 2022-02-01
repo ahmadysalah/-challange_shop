@@ -43,8 +43,6 @@ const SignIn = () => {
     );
   }
 
-
-  console.log(isSubmitting);
   useEffect(() => {
     let data = localStorage.getItem("RememberMe");
     const user: ILogin = data && JSON.parse(data);
