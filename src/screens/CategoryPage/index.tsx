@@ -51,7 +51,7 @@ export default function CategoryPage() {
           </div>
         </Grid>
       </Box>
-      <FeaturedProducts style={{ background: 'white' }}>
+      <FeaturedProducts style={{ background: theme.palette.background.default }}>
         <RowComponent
           width="90%"
           title={"Featured Products"}
