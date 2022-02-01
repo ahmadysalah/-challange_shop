@@ -1,7 +1,6 @@
 import Typography from "@mui/material/Typography";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { GET_ORDERS_FAIL } from "../../../../@types/orders.types";
 import { IColumn } from "../../../../@types/table.types";
 import Table from "../../../../components/Table";
 import { getMyOrders } from "../../../../redux/actions/orders.actions";
