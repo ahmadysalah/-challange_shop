@@ -50,6 +50,10 @@ export default function SliderProduct() {
         index={activeStep}
         slideStyle={styles.slideContainer}
         onChangeIndex={handleChangeIndex}
+        ignoreNativeScroll
+        enableMouseEvents
+        itemScope
+        scrolling="auto"
       >
         {(formattedProducts as Products[]).map((item) => (
           <Grid
@@ -67,7 +71,7 @@ export default function SliderProduct() {
               <Loading />
             ) : (
               (item.products as IProduct[]).map((product) => (
-                <Grid key={product._id} item md={3.8} sx={{ margin: "16px 0" }}>
+                <Grid key={product._id} item md={3.8} lg={3.8} sx={{ margin: "1px 0" }}>
                   <ProdectCard
                     id={product._id as string}
                     valueRating={product.rating}

@@ -78,18 +78,18 @@ export default function ShoppingCartPage() {
               alt="empty"
             />
           </div>
-          <div style={{ margin: "20px" }}>
+          <div style={{ margin: "20px 0" }}>
             <RowComponent
-              width="90%"
+              width="100%"
               title={"Recently viewed"}
               widthDivider={"10%"}
             />
-            <GridTopRateProducts xs={11} md={10.5}>
+            <GridTopRateProducts xs={11} md={14.5}>
               {loading ? (
                 <Loading />
               ) : (
                 (topProducts as IProduct[]).map((product) => (
-                  <Grid key={product._id} item xs={12} md={6} lg={6} xl={4.5}>
+                  <Grid key={product._id} item xs={12} md={6} lg={4} xl={4.5}>
                     <ProdectCard
                       id={product._id}
                       discountValue={30}
