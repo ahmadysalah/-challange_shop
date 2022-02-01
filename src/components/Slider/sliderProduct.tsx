@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { autoPlay } from "react-swipeable-views-utils";
 import SwipeableViews from "react-swipeable-views";
-import { DataCatagorySlider } from "./sliderData";
 import { DotsItem } from "./style";
 import ProdectCard from "../ProdectCard";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,14 +25,14 @@ export default function SliderProduct() {
     if ((products as IProduct[])?.length === 0) {
       dispatch(getProducts());
     }
-  }, [dispatch]);
+  }, [dispatch, products]);
 
   const handleChangeIndex = (index: number) => {
     setActiveStep(index);
   };
-  const NewProduct = useMemo(() => {
-    return formatProducts(products);
-  }, [products]);
+  // const NewProduct = useMemo(() => {
+  //   return formatProducts(products);
+  // }, [products]);
   const styles = {
     slideContainer: {
       padding: "16px 60px",
@@ -51,6 +50,10 @@ export default function SliderProduct() {
         index={activeStep}
         slideStyle={styles.slideContainer}
         onChangeIndex={handleChangeIndex}
+        ignoreNativeScroll
+        enableMouseEvents
+        itemScope
+        scrolling="auto"
       >
         {(formattedProducts as Products[]).map((item) => (
           <Grid
@@ -68,7 +71,7 @@ export default function SliderProduct() {
               <Loading />
             ) : (
               (item.products as IProduct[]).map((product) => (
-                <Grid key={product._id} item md={3.8} sx={{ margin: "16px 0" }}>
+                <Grid key={product._id} item md={3.8} lg={3.8} sx={{ margin: "1px 0" }}>
                   <ProdectCard
                     id={product._id as string}
                     valueRating={product.rating}

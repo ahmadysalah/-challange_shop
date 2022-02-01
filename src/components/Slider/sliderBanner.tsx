@@ -33,7 +33,10 @@ export default function Slider({ products }: { products: IProduct[] }) {
     <div>
       <AutoPlaySwipeableViews
         interval={6000}
+        ignoreNativeScroll
         enableMouseEvents
+        itemScope
+        scrolling="auto"
         index={activeStep}
         onChangeIndex={handleChangeIndex}
       >

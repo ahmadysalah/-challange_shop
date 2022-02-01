@@ -25,7 +25,7 @@ const columns: IColumn[] = [
   },
   {
     name: "dateOfBirth",
-    cellRenderer: (params) => new Date(params.value).toLocaleDateString(),
+    cellRenderer: (params) => new Date(params.value).toLocaleDateString("en-UK"),
   },
   {
     name: "actions",

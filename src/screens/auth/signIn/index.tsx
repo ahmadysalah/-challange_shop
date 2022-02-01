@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Formik, Form } from "formik";
 import { Typography } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -19,6 +19,7 @@ import {
 } from "./SignIn.styled";
 
 const SignIn = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { loading } = useSelector((state: AppState) => state.auth);
@@ -28,23 +29,22 @@ const SignIn = () => {
     remember_me: false,
   });
 
-  const handleSubmit = useCallback(
-    (values) => {
-      if (values.remember_me) {
-        const { password, ...rest } = values;
-        localStorage.setItem("RememberMe", JSON.stringify(rest));
-      } else {
-        localStorage.removeItem("RememberMe");
-      }
-      dispatch(
-        login(values, () => {
-          navigate("/");
-        })
-      );
-    },
-    [dispatch, navigate]
-  );
+  const handleSubmit = (values: any) => {
+    if (values.remember_me) {
+      // const { password, ...rest } = values;
+      localStorage.setItem("RememberMe", JSON.stringify(values));
+    } else {
+      localStorage.removeItem("RememberMe");
+    }
+    dispatch(
+      login(values, () => {
+        navigate("/");
+      })
+    );
+  }
 
+
+  console.log(isSubmitting);
   useEffect(() => {
     let data = localStorage.getItem("RememberMe");
     const user: ILogin = data && JSON.parse(data);
@@ -84,14 +84,16 @@ const SignIn = () => {
                 name="email"
                 placeholder="name@example.com"
                 label={"Enter your email address"}
+                submitted={isSubmitting}
               />
               <FormInput
                 name="password"
                 type="password"
                 placeholder="******"
                 label={"Enter your password"}
+                submitted={isSubmitting}
               />
-              <Button type="submit" disabled={loading}>
+              <Button type="submit" disabled={loading} onClick={() => setIsSubmitting(true)}>
                 {!loading ? (
                   <Typography
                     variant="h6"
@@ -125,7 +127,7 @@ const SignIn = () => {
         </Formik>
       </FormWrapper>
       <img src={"/static/SignIn.png"} alt={"login pic"} />
-    </Container>
+    </Container >
   );
 };
 

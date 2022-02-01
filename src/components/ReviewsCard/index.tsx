@@ -1,6 +1,5 @@
 import { ContainerReviewsCard } from "./ReviewsCard.styled";
-import FormReview from "./ReviewForm";
-import Review, { Reviewer } from "./Review";
+import Review from "./Review";
 import { IReview } from "../../@types/products.types";
 
 interface Iprops {
@@ -19,7 +18,7 @@ export default function ReviewsCard({ reviews }: Iprops) {
             optionsReviewer={review.comment}
             timeOfReview={
               review.createdAt &&
-              new Date(review.createdAt).toLocaleDateString()
+              new Date(review.createdAt).toLocaleDateString("en-UK")
             }
           />
         ))}

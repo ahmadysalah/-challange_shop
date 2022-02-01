@@ -69,7 +69,7 @@ const Profile = ({ user, handleChange, file }: IProps) => {
             </Typography>
             <Typography color="text.primary" fontWeight="500" fontSize="24px">
               {(user.dateOfBirth &&
-                new Date(user.dateOfBirth).toLocaleDateString()) ||
+                new Date(user.dateOfBirth).toLocaleDateString("en-UK")) ||
                 "-"}
             </Typography>
           </div>

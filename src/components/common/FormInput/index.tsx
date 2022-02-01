@@ -21,6 +21,7 @@ export interface IFormInputProps {
   secondValue?: string | boolean;
   firstLabel?: number | string;
   secondLabel?: number | string;
+  submitted?: boolean;
 }
 
 const FormInput = ({
@@ -33,9 +34,9 @@ const FormInput = ({
   secondValue,
   firstLabel,
   secondLabel,
+  submitted,
 }: IFormInputProps) => {
   const theme = useTheme();
-
   return (
     <Field name={name} style={{ ...style }}>
       {({
@@ -125,9 +126,11 @@ const FormInput = ({
               </>
             )}
           </div>
-          {meta.touched && meta.error && (
-            <ErrorMessage>{meta.error}</ErrorMessage>
-          )}
+
+          {submitted && meta.touched && meta.error
+            && (
+              <ErrorMessage>{meta.error}</ErrorMessage>
+            )}
         </>
       )}
     </Field>
