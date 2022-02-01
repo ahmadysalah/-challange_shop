@@ -59,7 +59,7 @@ export default function ProdectCard({
         <Box width="98%" m="auto" height="350px">
           <Img src={img} alt={name} width="100%" height="100%" />
         </Box>
-        <div style={{ padding: "0 5%" }}>
+        <div style={{ padding: "0 5%", }}>
           <Typography
             color="text.primary"
             my="15px"

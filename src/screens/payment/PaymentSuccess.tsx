@@ -6,9 +6,12 @@ import { IOrder, IOrderResponse } from "../../@types/orders.types";
 import { Button } from "../../components/Button/Button.style";
 import Loading from "../../components/common/Loading";
 import { Row, Section, Column } from "../../components/GlobalStyles";
+import RowComponent from "../../components/GlobalStyles/Row";
+import { SliderProduct } from "../../components/Slider";
 import { getCart } from "../../redux/actions/cart.actions";
 import { getOrderByID } from "../../redux/actions/orders.actions";
 import { AppState } from "../../redux/store";
+import { FeaturedProductsContiner } from "../ProdectPage/ProductPage.styled";
 import { Container } from "./Payment.styled";
 
 const PaymentSuccess = () => {
@@ -58,11 +61,9 @@ const PaymentSuccess = () => {
                   <Typography variant="body1" color="text.secondary">
                     {(() => {
                       if ((order as IOrder)?._id) {
-                        return `${
-                          (order as IOrder)?.shippingAddress?.address
-                        }, ${(order as IOrder)?.shippingAddress?.city}, ${
-                          (order as IOrder)?.shippingAddress?.country
-                        } - ${(order as IOrder)?.shippingAddress?.postalCode}`;
+                        return `${(order as IOrder)?.shippingAddress?.address
+                          }, ${(order as IOrder)?.shippingAddress?.city}, ${(order as IOrder)?.shippingAddress?.country
+                          } - ${(order as IOrder)?.shippingAddress?.postalCode}`;
                       }
                     })()}
                   </Typography>
@@ -115,6 +116,16 @@ const PaymentSuccess = () => {
           </Column>
         </>
       )}
+      <FeaturedProductsContiner style={{ marginTop: '2rem' }}>
+        <RowComponent
+          width="90%"
+          title={"Featured Products"}
+          widthDivider={"10%"}
+          alignItems="center"
+
+        />
+        <SliderProduct />
+      </FeaturedProductsContiner>
     </Container>
   );
 };
