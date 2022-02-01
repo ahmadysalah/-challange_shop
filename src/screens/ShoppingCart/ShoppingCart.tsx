@@ -29,6 +29,7 @@ export default function ShoppingCartPage() {
   const {
     products: { loading, topProducts },
     cart: {
+      loading: cartLoading,
       cart: { items, totalPrice, totalQty },
     },
   } = useSelector((state: AppState) => state);
@@ -42,10 +43,10 @@ export default function ShoppingCartPage() {
   const allDiscount = useMemo(() => {
     return Math.round(
       totalPrice -
-        (items as Item[]).reduce(
-          (acc, { product }: Item) => (product.discount as number) + acc,
-          0
-        )
+      (items as Item[]).reduce(
+        (acc, { product }: Item) => (product.discount as number) + acc,
+        0
+      )
     ).toFixed(2);
   }, [items, totalPrice]);
 
@@ -106,31 +107,35 @@ export default function ShoppingCartPage() {
           </div>
         </>
       ) : (
-        <Grid container spacing={4}>
-          <Grid item xs={12} lg={9}>
-            {(items as Item[]).map(({ product, qty, itemTotalPrice }: Item) => (
-              <Box mb="32px" key={product._id as string}>
-                <ShoppingCartCard
-                  id={product._id as string}
-                  title={product.name}
-                  counter={qty}
-                  price={itemTotalPrice}
-                  imgSrc={product.images?.[0]}
-                  discount={product.discount}
-                />
-              </Box>
-            ))}
+        cartLoading ? (
+          <Loading />
+        ) : (
+          <Grid container spacing={4}>
+            <Grid item xs={12} lg={9}>
+              {(items as Item[]).map(({ product, qty, itemTotalPrice }: Item) => (
+                <Box mb="32px" key={product._id as string}>
+                  <ShoppingCartCard
+                    id={product._id as string}
+                    title={product.name}
+                    counter={qty}
+                    price={itemTotalPrice}
+                    imgSrc={product.images?.[0]}
+                    discount={product.discount}
+                  />
+                </Box>
+              ))}
+            </Grid>
+            <Grid item xs={12} lg={3} sx={{ order: { xs: -1, lg: 22 } }}>
+              <SubTotalCard
+                priceAfterDiscount={`$${allDiscount}`}
+                priceBeforeDiscount={`$${Math.round(totalPrice as number).toFixed(
+                  2
+                )}`}
+                numberOfItems={totalQty}
+              />
+            </Grid>
           </Grid>
-          <Grid item xs={12} lg={3} sx={{ order: { xs: -1, lg: 22 } }}>
-            <SubTotalCard
-              priceAfterDiscount={`$${allDiscount}`}
-              priceBeforeDiscount={`$${Math.round(totalPrice as number).toFixed(
-                2
-              )}`}
-              numberOfItems={totalQty}
-            />
-          </Grid>
-        </Grid>
+        )
       )}
     </Box>
   );

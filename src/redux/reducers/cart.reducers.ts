@@ -78,8 +78,13 @@ export const cartReducer = (
       };
     case CartConstants.CLEAR_CART:
       return {
-        ...initial_state,
-      };
+        ...state,
+        cart: {
+          items: [],
+          totalPrice: 0,
+          totalQty: 0,
+        }
+      }
     default:
       return state;
   }

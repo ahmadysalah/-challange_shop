@@ -19,7 +19,7 @@ export default function ReviewsCard({ reviews }: Iprops) {
             optionsReviewer={review.comment}
             timeOfReview={
               review.createdAt &&
-              new Date(review.createdAt).toLocaleDateString()
+              new Date(review.createdAt).toLocaleDateString("en-UK")
             }
           />
         ))}
