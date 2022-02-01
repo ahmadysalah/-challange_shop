@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback } from "react";
+import { ChangeEvent, useCallback, useEffect } from "react";
 import { Backdrop, CircularProgress, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -10,10 +10,16 @@ import { AppState } from "../../redux/store";
 import OrdersProduct from "./tabs/orders/index";
 import { notify } from "../../utils/helpers";
 import { IUser } from "../../@types/auth.types";
+import Users from "../admin/users";
+import AllOrdersProduct from "../admin/orders";
+import Products from "../admin/products";
+import { useParams } from 'react-router-dom'
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { tabUser } = useParams()
+
   const {
     auth: { user, loading },
   } = useSelector((state: AppState) => state);
@@ -79,11 +85,41 @@ const ProfilePage = () => {
     },
   ];
 
+  const adminTabs = [
+    {
+      label: (
+        <Typography variant="h4" sx={{ fontSize: "1.5rem" }}>
+          Users
+        </Typography>
+      ),
+      content: <Users />,
+    },
+    {
+      label: (
+        <Typography variant="h4" sx={{ fontSize: "1.5rem" }}>
+          Orders
+        </Typography>
+      ),
+      content: <AllOrdersProduct />,
+    },
+    {
+      label: (
+        <Typography variant="h4" sx={{ fontSize: "1.5rem" }}>
+          Products
+        </Typography>
+      ),
+      content: <Products />,
+    }
+
+  ]
+
+  const customTab = user.isAdmin ? [...Tabs].concat([...adminTabs]) : [...Tabs]
+
   return (
     <Container>
       <VerticalTabs
-        labels={[...Tabs].map((label) => label?.label)}
-        content={[...Tabs].map((content) => content?.content)}
+        labels={customTab.map((label) => label?.label)}
+        content={customTab.map((content) => content?.content)}
         button="Log out"
         buttonClick={() => handleLogout()}
       />

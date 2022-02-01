@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
 import { IColumn } from "../../../@types/table.types";
 import Table from "../../../components/Table";
-import { Container } from "../products/Products.styled";
+import { ContainerFull } from "../products/Products.styled";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Edit from "./Update";
@@ -48,7 +48,7 @@ function Users() {
   }, [dispatch]);
 
   return (
-    <Container>
+    <ContainerFull>
       <Typography variant="h2" color="text.primary">
         Users
       </Typography>
@@ -62,7 +62,7 @@ function Users() {
           paginationPageSize={10}
         />
       </div>
-    </Container>
+    </ContainerFull>
   );
 }
 

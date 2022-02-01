@@ -10,20 +10,39 @@ import { changePassword } from "../../../../redux/actions/auth.actions";
 import { AppState } from "../../../../redux/store";
 import { notify } from "../../../../utils/helpers";
 import { FormWrapper } from "../../../auth/signIn/SignIn.styled";
+import { Row, Column } from "../../../../components/GlobalStyles";
+
 
 const changeformSchema = () =>
   yup.object().shape({
+    email: yup.string().email().required("Email address is required"),
+    firstName: yup.string().required("First Name  is required"),
+    lastName: yup.string().required("Last Name  is required"),
     password: yup.string().required("Password is required"),
-    passwordConfirmation: yup
-      .string()
+    passwordConfirmation: yup.string()
       .required("Password Confirmation is required")
       .oneOf([yup.ref("password")], "Passwords must match"),
   });
 
-const ChangePasswordForm = styled(FormWrapper)`
-  margin-right: 0;
+const ChangePasswordForm = styled('div')`
+  gap: 50px;
+
+  & form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
   @media (max-width: 1500px) {
     width: 100%;
+    margin-right: 3em;
+  }
+
+  @media (max-width: 768px) {
+    margin: auto;
+    width: 80%;
+    padding: 20px 0;
   }
 `;
 
@@ -41,7 +60,7 @@ export default function ChangePassword({
     (values) => {
       dispatch(
         changePassword({ ...user, ...values }, () => {
-          notify("success", "Password changed successfully");
+          notify("success", " Update user successfully");
           handleClose?.();
         })
       );
@@ -50,11 +69,16 @@ export default function ChangePassword({
   );
 
   return (
-    <ChangePasswordForm>
+    <ChangePasswordForm >
       <Formik
+        enableReinitialize
         initialValues={{
-          password: "",
-          passwordConfirmation: "",
+          firstName: user.firstName,
+          lastName: user.lastName,
+          password: '',
+          email: user.email,
+          birthday: user.dateOfBirth,
+          passwordConfirmation: ""
         }}
         validationSchema={changeformSchema}
         onSubmit={handleSubmit}
@@ -62,31 +86,75 @@ export default function ChangePassword({
         {() => (
           <Form>
             <Typography variant="h4" color={"text.primary"}>
-              Change password{" "}
+              Change Profile{" "}
             </Typography>
-            <FormInput
-              label={"Enter New password"}
-              type="password"
-              placeholder="******"
-              name="password"
-            />
-            <FormInput
-              name="passwordConfirmation"
-              type="password"
-              placeholder="******"
-              label={"Confirm your password"}
-            />
+            <Row justfiyContent="flex-start" width="100%" gap="10%" wrap>
+              <Column justfiyContent="flex-start" width="100%">
+                <FormInput
+                  label={"First Name"}
+                  type="text"
+                  name="firstName"
+                />
+              </Column>
+              <Column justfiyContent="flex-start" width="100%">
+                <FormInput
+                  label={"LastName"}
+                  type="text"
+                  name="lastName"
+                />
+              </Column>
+            </Row>
+            <Row justfiyContent="flex-start" width="100%" gap="10%" wrap>
+              <Column justfiyContent="flex-start" width="100%">
+                <FormInput
+                  label={"Email"}
+                  type="text"
+                  name="email"
+                />
+              </Column>
+              <Column justfiyContent="flex-start" width="100%">
+                <FormInput
+                  label={"Date  of  Birthday "}
+                  type="date"
+                  name="birthday"
+                />
+              </Column>
+            </Row>
+            <Row justfiyContent="flex-start" width="100%" gap="10%" wrap>
+              <Column justfiyContent="flex-start" width="100%">
+
+                <FormInput
+                  name="password"
+                  type="password"
+                  placeholder="******"
+                  label={"Enter your password"}
+                />
+              </Column>
+            </Row>
+            <Row justfiyContent="flex-start" width="100%" gap="10%" wrap>
+              <Column justfiyContent="flex-start" width="100%">
+
+                <FormInput
+                  name="passwordConfirmation"
+                  type="password"
+                  placeholder="******"
+                  label={"Confirmation your password"}
+                />
+              </Column>
+            </Row>
+
+
             <Button
               width="150px"
               fontSize="20px"
               style={{ marginTop: "10px", alignSelf: "flex-end" }}
               type="submit"
             >
-              Confirm
+              Updute
             </Button>
           </Form>
         )}
       </Formik>
-    </ChangePasswordForm>
+    </ChangePasswordForm >
   );
 }

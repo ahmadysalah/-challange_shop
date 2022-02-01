@@ -5,7 +5,7 @@ import { IColumn } from "../../../@types/table.types";
 import { Button } from "../../../components/Button/Button.style";
 import { Row } from "../../../components/GlobalStyles";
 import Table from "../../../components/Table";
-import { Container } from "./Products.styled";
+import { Container, ContainerFull } from "./Products.styled";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "../../../redux/store";
@@ -49,7 +49,7 @@ const Products = () => {
   }, [dispatch]);
 
   return (
-    <Container>
+    <ContainerFull>
       <Typography variant="h2" color="text.primary">
         Products
       </Typography>
@@ -83,7 +83,7 @@ const Products = () => {
           paginationPageSize={10}
         />
       </div>
-    </Container>
+    </ContainerFull>
   );
 };
 

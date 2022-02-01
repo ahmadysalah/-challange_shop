@@ -157,10 +157,13 @@ export const changePassword =
         type: AuthConstants.UPDATE_PASSWORD_START,
       });
 
-      await API.put("/users/profile", {
+     const  res= await API.put("/users/profile", {
         ...rest,
         password: user.password,
       });
+
+      localStorage.setItem("user-data", JSON.stringify(res.data));
+
 
       dispatch({
         type: AuthConstants.UPDATE_PASSWORD_SUCCESS,
