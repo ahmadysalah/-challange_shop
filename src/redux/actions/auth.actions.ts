@@ -151,6 +151,7 @@ export const editProfile =
 
 export const changePassword =
   (user: IUser, callback?: Function) =>
+  async (dispatch: Dispatch<ActionsType>) => {
     try {
       const { token, cart, _id, ...rest } = user;
       dispatch({

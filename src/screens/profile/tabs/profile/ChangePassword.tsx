@@ -26,7 +26,6 @@ const changeformSchema = () =>
 
 const ChangePasswordForm = styled('div')`
   gap: 50px;
-
   & form {
     display: flex;
     flex-direction: column;
@@ -69,7 +68,7 @@ export default function ChangePassword({
   );
 
   return (
-    <ChangePasswordForm >
+    <ChangePasswordForm>
       <Formik
         enableReinitialize
         initialValues={{
