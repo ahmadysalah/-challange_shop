@@ -50,6 +50,10 @@ export default function SliderProduct() {
         index={activeStep}
         slideStyle={styles.slideContainer}
         onChangeIndex={handleChangeIndex}
+        ignoreNativeScroll
+        enableMouseEvents
+        itemScope
+        scrolling="auto"
       >
         {(formattedProducts as Products[]).map((item) => (
           <Grid

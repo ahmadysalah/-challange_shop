@@ -48,6 +48,10 @@ export default function SliderCatagory() {
         index={activeStep}
         slideStyle={styles.slideContainer}
         onChangeIndex={handleChangeIndex}
+        ignoreNativeScroll
+        enableMouseEvents
+        itemScope
+        scrolling="auto"
       >
         {(formattedCategories as Categories[]).map((item_) => (
           <Grid

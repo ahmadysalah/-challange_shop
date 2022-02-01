@@ -54,7 +54,7 @@ export const lightTheme = createTheme({
     },
     secondary: {
       main: "#f2f2f2",
-      light:"#f7f8fc"
+      light: "#f7f8fc"
     },
     divider: "rgba(212,212,212,0.5)",
     success: {
@@ -68,7 +68,7 @@ export const lightTheme = createTheme({
     background: {
       paper: "#f2f2f2",
       default: "#ffffff",
-    
+
     },
   },
 });
@@ -82,7 +82,7 @@ export const darkTheme = createTheme({
     },
     secondary: {
       main: "#2f2f2f",
-      light:"#242424"
+      light: "#242424"
     },
     divider: "rgba(212,212,212,0.5)",
     success: {
