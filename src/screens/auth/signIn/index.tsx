@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Formik, Form } from "formik";
 import { Typography } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -29,22 +29,21 @@ const SignIn = () => {
     remember_me: false,
   });
 
-  const handleSubmit = useCallback(
-    (values) => {
-      if (values.remember_me) {
-        // const { password, ...rest } = values;
-        localStorage.setItem("RememberMe", JSON.stringify(values));
-      } else {
-        localStorage.removeItem("RememberMe");
-      }
-      dispatch(
-        login(values, () => {
-          navigate("/");
-        })
-      );
-    },
-    [dispatch, navigate, isSubmitting]
-  );
+  const handleSubmit = (values: any) => {
+    if (values.remember_me) {
+      // const { password, ...rest } = values;
+      localStorage.setItem("RememberMe", JSON.stringify(values));
+    } else {
+      localStorage.removeItem("RememberMe");
+    }
+    dispatch(
+      login(values, () => {
+        navigate("/");
+      })
+    );
+  }
+
+
   console.log(isSubmitting);
   useEffect(() => {
     let data = localStorage.getItem("RememberMe");
