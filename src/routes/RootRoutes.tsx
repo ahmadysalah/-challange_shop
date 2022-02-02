@@ -69,9 +69,10 @@ const RootRoutes = {
       component: <PageNotFound />,
     },
     {
-      path: "/profile",
+      path: "/profile/:tabUser",
       component: <Profile />,
     },
+
 
     ...AdminRoutes,
     ...RedirectRoute,

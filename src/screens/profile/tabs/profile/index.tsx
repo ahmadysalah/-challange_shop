@@ -23,6 +23,7 @@ const Input = styled("input")({
 });
 const Profile = ({ user, handleChange, file }: IProps) => {
   const [open, setOpen] = useState(false);
+  // const [isEdit, setIsEDIT] = useState(true);
   const handleClose = () => {
     setOpen(false);
   };
@@ -81,7 +82,7 @@ const Profile = ({ user, handleChange, file }: IProps) => {
             onClick={() => setOpen(true)}
             style={{ fontWeight: "500" }}
           >
-            Change Password
+            Update Profile
           </Button>
           <BootstrapDialog
             onClose={handleClose}
@@ -102,6 +103,7 @@ const Profile = ({ user, handleChange, file }: IProps) => {
           {!file && user.firstName[0]}
         </AvatarTab>
         <label htmlFor="contained-button-file">
+
           <Input
             accept="image/*"
             id="contained-button-file"

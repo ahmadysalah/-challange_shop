@@ -3,6 +3,8 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import { TabComponent, WrapperTab, Line, Button } from "./Tabs.style";
+import { useParams, useNavigate } from "react-router-dom";
+import { routeTabNumber, routeTabString } from "../../utils/RouteConvert";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -40,10 +42,31 @@ function a11yProps(index: number) {
 }
 
 export default function VerticalTabs(props: VerticalTabsProps) {
-  const [value, setValue] = React.useState(0);
+  const { tabUser } = useParams()
+  console.log("tabUser", tabUser)
+  const navigater = useNavigate()
 
+  const memoizedValue = React.useMemo(() => routeTabNumber(tabUser || "me"), [tabUser])
+  const [value, setValue] = React.useState(memoizedValue);
+  // const routeTabStr = (() => routeTabString(value || 0), [setValue, tabUser])
+  // const memoizedCallback = React.useCallback(
+  //   (value: number) => {
+  //     return routeTabString(value)
+  //   },
+  //   [setValue, tabUser],
+  // )
+  React.useEffect(() => {
+    setValue(memoizedValue)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tabUser]);
+
+  // routeTabString
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
+    // console.log("new value ", newValue);
+
+    setValue(() => newValue);
+
+    navigater(`/profile/${routeTabString(newValue)}`)
   };
 
   return (
@@ -53,7 +76,7 @@ export default function VerticalTabs(props: VerticalTabsProps) {
         value={value}
         onChange={handleChange}
         aria-label="Vertical tabs "
-        sx={{ borderColor: "divider" }}
+        sx={{ borderColor: "divider", }}
       >
         {props.labels.map((label, index) => (
           <Tab label={label} {...a11yProps(index)} />

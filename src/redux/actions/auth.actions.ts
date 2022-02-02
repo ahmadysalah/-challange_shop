@@ -151,27 +151,30 @@ export const editProfile =
 
 export const changePassword =
   (user: IUser, callback?: Function) =>
-    async (dispatch: Dispatch<ActionsType>) => {
-      try {
-        const { token, cart, _id, ...rest } = user;
-        dispatch({
-          type: AuthConstants.UPDATE_PASSWORD_START,
-        });
+  async (dispatch: Dispatch<ActionsType>) => {
+    try {
+      const { token, cart, _id, ...rest } = user;
+      dispatch({
+        type: AuthConstants.UPDATE_PASSWORD_START,
+      });
 
-        await API.put("/users/profile", {
-          ...rest,
-          password: user.password,
-        });
+     const  res= await API.put("/users/profile", {
+        ...rest,
+        password: user.password,
+      });
 
-        dispatch({
-          type: AuthConstants.UPDATE_PASSWORD_SUCCESS,
-        });
-        callback?.();
-      } catch (error: any) {
-        notify("error", error?.response?.data?.message || error.message);
-        dispatch({
-          type: AuthConstants.UPDATE_PASSWORD_FAIL,
-          payload: error?.response?.data?.message || error.message,
-        });
-      }
-    };
+      localStorage.setItem("user-data", JSON.stringify(res.data));
+
+
+      dispatch({
+        type: AuthConstants.UPDATE_PASSWORD_SUCCESS,
+      });
+      callback?.();
+    } catch (error: any) {
+      notify("error", error?.response?.data?.message || error.message);
+      dispatch({
+        type: AuthConstants.UPDATE_PASSWORD_FAIL,
+        payload: error?.response?.data?.message || error.message,
+      });
+    }
+  };

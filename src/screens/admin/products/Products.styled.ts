@@ -77,3 +77,30 @@ export const IconWrapper = styled.label`
     fill: ${({ theme }) => theme.palette.text.primary};
   }
 `;
+
+
+
+
+export const ContainerFull = styled.div`
+  max-width: 100%;
+  margin-inline: auto;
+  margin-block: 2em;
+  display: flex;
+  flex-direction: column;
+
+  /* & .ag-center-cols-container {
+    width: 100% !important;
+  }
+  & .ag-header-container {
+    width: 100% !important;
+  } */
+
+  & .ag-header-cell-label {
+    justify-content: center;
+    text-align: center;
+  }
+  & .ag-cell-value {
+    justify-content: center;
+    text-align: center;
+  }
+`;

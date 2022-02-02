@@ -36,6 +36,7 @@ export const AvatarTab = styleM(Avatar)<Iprops>((props) => ({
   objectFit: "cover",
   fontSize: props.fontSize || "2rem",
   textTransform: "uppercase",
+  backgroundPosition:'center'
 }));
 
 export const LeftSide = styled.div`
@@ -45,6 +46,7 @@ export const RightSide = styled("div")((props) => ({
   display: "flex",
   flexDirection: "column",
   alignItems:"center",
+  margin: '0px  auto',
   [props.theme.breakpoints.down("md")]: {
     justifyContent: "space-between",
     "& img": {

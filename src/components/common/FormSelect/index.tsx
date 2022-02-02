@@ -23,7 +23,11 @@ const FormSelect = (props: IProps) => {
             multiline
             displayEmpty
             value={field.value}
-            onChange={(e) => form.setFieldValue(props.name, e.target.value)}
+            onChange={(e) => {
+              form.setFieldValue(props.name, e.target.value)
+              e.stopPropagation()
+
+            }}
           >
             {props.data.map((item) => (
               <MenuItem key={item.value} value={item.value}>
