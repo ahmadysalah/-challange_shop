@@ -60,17 +60,13 @@ const Products = () => {
           sx={{ width: "fit-content", height: "fit-content", padding: "10px" }}
           to={"/products/new"}
         >
-          {!loading ? (
-            <Typography
-              variant="body2"
-              color="text.primary"
-              sx={{ paddingInline: "2em", textTransform: "capitalize" }}
-            >
-              Create Product
-            </Typography>
-          ) : (
-            <CircularProgress size={20} color="inherit" />
-          )}
+          <Typography
+            variant="body2"
+            color="text.primary"
+            sx={{ paddingInline: "2em", textTransform: "capitalize" }}
+          >
+            Create Product
+          </Typography>
         </Button>
       </Row>
       <div style={{ width: "100%", margin: "auto" }}>
