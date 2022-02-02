@@ -117,7 +117,7 @@ const Actions = (params: ICellRendererParams) => {
 };
 
 export default function AllOrdersProduct() {
-  const { allOrders, loading } = useSelector((state: AppState) => state.orders);
+  const { allOrders } = useSelector((state: AppState) => state.orders);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllOrders());
@@ -137,15 +137,17 @@ export default function AllOrdersProduct() {
       >
         ALL ORDERS
       </Typography>
-      {loading ? <Loading /> :
-
+      {!allOrders ? <Loading /> :
         <Table
           data={allOrders}
           columns={columns}
           frameworkComponents={{
             ActionsRenderer: Actions,
           }}
-        />}
+        />
+
+      }
+
     </div>
   );
 }
