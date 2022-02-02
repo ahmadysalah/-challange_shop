@@ -70,7 +70,7 @@ const SignIn = () => {
           enableReinitialize
           initialValues={{
             email: state.email || "",
-            password: "",
+            password: state.password || "",
             remember_me: state.remember_me || false,
           }}
           validationSchema={formSchema}
