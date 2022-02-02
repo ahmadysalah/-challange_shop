@@ -33,7 +33,7 @@ export default function UserDetails() {
     dispatch(
       editUser((user as IUserForm)._id as string, values, () => {
         notify("success", "User Updated successfully");
-        navgate("/users");
+        navgate("/profile/users");
       })
     );
   };

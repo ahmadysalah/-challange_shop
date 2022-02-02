@@ -77,7 +77,7 @@ const NewProductForm = ({ product, categories }: IProps) => {
         dispatch(
           updateProduct(product._id as string, values, () => {
             notify("success", "Product Updated successfully");
-            navigate("/products");
+            navigate("/profile/products");
           })
         );
       } else {
@@ -85,7 +85,7 @@ const NewProductForm = ({ product, categories }: IProps) => {
         dispatch(
           createProduct(values, () => {
             notify("success", "Product Created successfully");
-            navigate("/products");
+            navigate("profile/products");
           })
         );
       }
