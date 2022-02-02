@@ -50,7 +50,7 @@ export const TabComponent = styled("div")((props) => ({
   padding: "20px 16px",
   borderRadius: "16px",
   borderRight: "none",
-  width: "950px",
+  width: "80%",
   [props.theme.breakpoints.down("md")]: {
     width: "100%",
   },

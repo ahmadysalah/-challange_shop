@@ -119,7 +119,7 @@ export default function AllOrdersProduct() {
   }, [dispatch]);
 
   return (
-    <div style={{ width: "60%", margin: "auto" }}>
+    <div style={{ width: "100%", margin: "auto" }}>
       <Typography
         color="text.primary"
         variant="h2"

@@ -118,7 +118,7 @@ export default function AccountMenu({ auth }: Iprops) {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <CustomLink to={auth.isAuthenticated ? "/profile" : "/auth/login"}>
+        <CustomLink to={auth.isAuthenticated ? "/profile/me" : "/auth/login"}>
           <MenuItem>
             <Avatar src={auth.user.profileImage as string} />
             {`${auth.user.firstName} ${auth.user.lastName}`}
@@ -127,7 +127,7 @@ export default function AccountMenu({ auth }: Iprops) {
         <Divider />
         {auth.user.isAdmin && (
           <div>
-            <CustomLink to={"/orders"}>
+            <CustomLink to={"/profile/orders"}>
               <MenuItem>
                 <ListItemIcon>
                   <FactCheckIcon fontSize="small" />
@@ -135,7 +135,7 @@ export default function AccountMenu({ auth }: Iprops) {
                 Orders
               </MenuItem>
             </CustomLink>
-            <CustomLink to={"/products"}>
+            <CustomLink to={"/profile/products"}>
               <MenuItem>
                 <ListItemIcon>
                   <CategoryIcon fontSize="small" />
@@ -143,7 +143,7 @@ export default function AccountMenu({ auth }: Iprops) {
                 Products
               </MenuItem>
             </CustomLink>
-            <CustomLink to={"/users"}>
+            <CustomLink to={"/profile/users"}>
               <MenuItem>
                 <ListItemIcon>
                   <GroupIcon fontSize="small" />
