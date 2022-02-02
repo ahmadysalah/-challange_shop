@@ -22,6 +22,7 @@ const changeformSchema = () =>
     passwordConfirmation: yup.string()
       .required("Password Confirmation is required")
       .oneOf([yup.ref("password")], "Passwords must match"),
+    dateOfBirth: yup.date().required('Required').max(new Date(), "Are you a time traveler?!"),
   });
 
 const ChangePasswordForm = styled('div')`
@@ -76,7 +77,7 @@ export default function ChangePassword({
           lastName: user.lastName,
           password: '',
           email: user.email,
-          birthday: user.dateOfBirth,
+          dateOfBirth: user.dateOfBirth,
           passwordConfirmation: ""
         }}
         validationSchema={changeformSchema}
@@ -115,7 +116,7 @@ export default function ChangePassword({
                 <FormInput
                   label={"Date  of  Birthday "}
                   type="date"
-                  name="birthday"
+                  name="dateOfBirth"
                 />
               </Column>
             </Row>
