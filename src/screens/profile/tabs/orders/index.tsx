@@ -63,6 +63,7 @@ export default function OrdersProduct() {
         ALL ORDERS
       </Typography>
       {loading ? <Loading /> :
+
         <Table data={newOrders} columns={columns} />
       }
     </div>

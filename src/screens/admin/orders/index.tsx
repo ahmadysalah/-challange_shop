@@ -117,11 +117,14 @@ const Actions = (params: ICellRendererParams) => {
 };
 
 export default function AllOrdersProduct() {
-  const { allOrders } = useSelector((state: AppState) => state.orders);
+  const { allOrders, loading } = useSelector((state: AppState) => state.orders);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getAllOrders());
   }, [dispatch]);
+
+  console.log("loading", loading, allOrders);
 
   return (
     <div style={{ width: "100%", margin: "auto" }}>
