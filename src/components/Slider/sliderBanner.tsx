@@ -76,7 +76,9 @@ export default function Slider({ products }: { products: IProduct[] }) {
               </Button>
             </Stack>
             <DivImg>
-              <Img src={product.images?.[0]} alt={product.name || "slide"} />
+              <Img src={product.images?.[0]} alt={product.name || "slide"} style={{
+                minWidth: "30em",
+              }} />
             </DivImg>
           </Contianer>
         ))}

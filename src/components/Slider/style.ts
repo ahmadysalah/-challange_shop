@@ -66,7 +66,7 @@ interface IpropsDots {
   margin?: string;
   active: boolean;
 }
-export const DotsItem = styled("span")<IpropsDots>`
+export const DotsItem = styled("span") <IpropsDots>`
   width: ${(props) => props.width || "25px"};
   height: ${(props) => props.height || "25px"};
   border-radius: 50%;
