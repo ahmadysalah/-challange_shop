@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useEffect } from "react";
+import { ChangeEvent, lazy, useCallback, useEffect } from "react";
 import { Backdrop, CircularProgress, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -10,15 +10,13 @@ import { AppState } from "../../redux/store";
 import OrdersProduct from "./tabs/orders/index";
 import { notify } from "../../utils/helpers";
 import { IUser } from "../../@types/auth.types";
-import Users from "../admin/users";
-import AllOrdersProduct from "../admin/orders";
-import Products from "../admin/products";
-import { useParams } from 'react-router-dom'
+const Users = lazy(() => import("../admin/users"));
+const AllOrdersProduct = lazy(() => import("../admin/orders"));
+const Products = lazy(() => import("../admin/products"));
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { tabUser } = useParams()
 
   const {
     auth: { user, loading },

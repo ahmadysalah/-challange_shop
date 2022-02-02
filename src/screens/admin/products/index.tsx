@@ -1,5 +1,4 @@
 import { Typography } from "@mui/material";
-import CircularProgress from "@mui/material/CircularProgress";
 import { Link } from "react-router-dom";
 import { IColumn } from "../../../@types/table.types";
 import { Button } from "../../../components/Button/Button.style";
@@ -12,6 +11,7 @@ import { AppState } from "../../../redux/store";
 import Actions from "./components/Actions";
 import { minimizeID } from "../../../utils/helpers";
 import { getAllProducts } from "../../../redux/actions/products.actions";
+import Loading from "../../../components/Loading";
 
 const columns: IColumn[] = [
   {
@@ -53,14 +53,16 @@ const Products = () => {
       <Typography variant="h2" color="text.primary">
         Products
       </Typography>
-      <Row justfiyContent="flex-end" width="100%">
-        <Button
-          disabled={loading}
-          as={Link}
-          sx={{ width: "fit-content", height: "fit-content", padding: "10px" }}
-          to={"/products/new"}
-        >
-          {!loading ? (
+      {loading ? <Loading /> : <>
+        <Row justfiyContent="flex-end" width="100%">
+          <Button
+            disabled={loading}
+            as={Link}
+            sx={{ width: "fit-content", height: "fit-content", padding: "10px" }}
+            to={"/products/new"}
+          >
+
+
             <Typography
               variant="body2"
               color="text.primary"
@@ -68,21 +70,25 @@ const Products = () => {
             >
               Create Product
             </Typography>
-          ) : (
-            <CircularProgress size={20} color="inherit" />
-          )}
-        </Button>
-      </Row>
-      <div style={{ width: "100%", margin: "auto" }}>
-        <Table
-          data={allProducts}
-          columns={columns}
-          frameworkComponents={{
-            ActionsRenderer: Actions,
-          }}
-          paginationPageSize={10}
-        />
-      </div>
+
+          </Button>
+        </Row>
+        <div style={{ width: "100%", margin: "auto" }}>
+          {loading ? <Loading /> :
+
+            <Table
+              data={allProducts}
+              columns={columns}
+              frameworkComponents={{
+                ActionsRenderer: Actions,
+              }}
+              paginationPageSize={10}
+            />
+
+          }
+        </div>
+      </>}
+
     </ContainerFull>
   );
 };

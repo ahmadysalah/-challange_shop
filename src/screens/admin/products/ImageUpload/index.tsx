@@ -8,9 +8,11 @@ interface IProps {
   values: { [key: string]: any };
   errors: { [key: string]: any };
   touched: { [key: string]: any };
+
 }
 
 const ImageUpload = ({ values, errors, touched }: IProps) => {
+
   return (
     <>
       <Column justfiyContent="center" width="fit-content">
@@ -66,6 +68,7 @@ const ImageUpload = ({ values, errors, touched }: IProps) => {
             )}
           </ImageContainer>
         </Row>
+
       </Column>
       {errors["images"] && touched["images"] && (
         <Typography variant="caption" color="red">

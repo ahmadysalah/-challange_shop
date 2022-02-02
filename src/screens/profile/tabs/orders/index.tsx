@@ -2,6 +2,7 @@ import Typography from "@mui/material/Typography";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IColumn } from "../../../../@types/table.types";
+import Loading from "../../../../components/Loading";
 import Table from "../../../../components/Table";
 import { getMyOrders } from "../../../../redux/actions/orders.actions";
 import { AppState } from "../../../../redux/store";
@@ -32,7 +33,7 @@ const columns: IColumn[] = [
 ];
 
 export default function OrdersProduct() {
-  const { myOrders } = useSelector((state: AppState) => state.orders);
+  const { myOrders, loading } = useSelector((state: AppState) => state.orders);
   console.log(myOrders);
   const newOrders = [...myOrders].map(
     (order: any) => ({
@@ -61,7 +62,9 @@ export default function OrdersProduct() {
       >
         ALL ORDERS
       </Typography>
-      <Table data={newOrders} columns={columns} />
+      {loading ? <Loading /> :
+        <Table data={newOrders} columns={columns} />
+      }
     </div>
   );
 }

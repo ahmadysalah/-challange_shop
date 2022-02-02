@@ -25,7 +25,10 @@ function App() {
           <Elements stripe={stripePromise}>
             <GlobalStyle />
             <Header />
+
             <Routes>
+
+
               {RootRoutes.routes.map((route, Index) => (
                 <Route
                   path={route.path}
