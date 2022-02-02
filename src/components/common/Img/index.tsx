@@ -4,12 +4,13 @@ interface Iprops {
   alt: string;
   width?: string;
   height?: string;
+  style?: React.CSSProperties;
 }
-export default function Img({ src, alt, width, height }: Iprops) {
+export default function Img({ src, alt, width, height, style }: Iprops) {
   const [imageError, setImageError] = useState<boolean>(false);
   return (
     <img
-      style={{ objectFit: "contain" }}
+      style={{ objectFit: "contain", ...style }}
       src={imageError ? "/static/not-found-image.png" : src}
       alt={alt}
       width={width}

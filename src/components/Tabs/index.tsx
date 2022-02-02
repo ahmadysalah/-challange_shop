@@ -47,12 +47,12 @@ export default function VerticalTabs(props: VerticalTabsProps) {
 
   const memoizedValue = React.useMemo(() => routeTabNumber(tabUser || "me"), [tabUser])
   const [value, setValue] = React.useState(memoizedValue);
-  const memoizedCallback = React.useCallback(
-    (value: number) => {
-      return routeTabString(value)
-    },
-    [setValue, tabUser],
-  )
+  // const memoizedCallback = React.useCallback(
+  //   (value: number) => {
+  //     return routeTabString(value)
+  //   },
+  //   [setValue, tabUser],
+  // )
   React.useEffect(() => {
     setValue(memoizedValue)
     // eslint-disable-next-line react-hooks/exhaustive-deps
