@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useEffect } from "react";
+import { ChangeEvent, useCallback } from "react";
 import { Backdrop, CircularProgress, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -13,12 +13,12 @@ import { IUser } from "../../@types/auth.types";
 import Users from "../admin/users";
 import AllOrdersProduct from "../admin/orders";
 import Products from "../admin/products";
-import { useParams } from 'react-router-dom'
+// import { useParams } from 'react-router-dom'
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { tabUser } = useParams()
+  // const { tabUser } = useParams()
 
   const {
     auth: { user, loading },

@@ -49,15 +49,15 @@ export default function VerticalTabs(props: VerticalTabsProps) {
   const memoizedValue = React.useMemo(() => routeTabNumber(tabUser || "me"), [tabUser])
   const [value, setValue] = React.useState(memoizedValue);
   // const routeTabStr = (() => routeTabString(value || 0), [setValue, tabUser])
-  const memoizedCallback = React.useCallback(
-    (value: number) => {
-      return routeTabString(value)
-    },
-    [setValue, tabUser],
-  )
+  // const memoizedCallback = React.useCallback(
+  //   (value: number) => {
+  //     return routeTabString(value)
+  //   },
+  //   [setValue, tabUser],
+  // )
   React.useEffect(() => {
     setValue(memoizedValue)
-  }, [tabUser]);
+  }, [tabUser, memoizedValue]);
 
   // routeTabString
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {

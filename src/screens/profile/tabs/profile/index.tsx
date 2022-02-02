@@ -23,7 +23,7 @@ const Input = styled("input")({
 });
 const Profile = ({ user, handleChange, file }: IProps) => {
   const [open, setOpen] = useState(false);
-  const [isEdit, setIsEDIT] = useState(true);
+  // const [isEdit, setIsEDIT] = useState(true);
   const handleClose = () => {
     setOpen(false);
   };
