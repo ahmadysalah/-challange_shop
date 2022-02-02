@@ -9,7 +9,6 @@ import FormInput from "../../../../components/common/FormInput";
 import { changePassword } from "../../../../redux/actions/auth.actions";
 import { AppState } from "../../../../redux/store";
 import { notify } from "../../../../utils/helpers";
-import { FormWrapper } from "../../../auth/signIn/SignIn.styled";
 import { Row, Column } from "../../../../components/GlobalStyles";
 
 

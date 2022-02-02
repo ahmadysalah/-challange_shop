@@ -55,6 +55,7 @@ export default function VerticalTabs(props: VerticalTabsProps) {
   )
   React.useEffect(() => {
     setValue(memoizedValue)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tabUser]);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {

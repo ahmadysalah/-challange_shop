@@ -2,7 +2,6 @@ import { Field, FieldProps } from "formik";
 import { Select, ErrorMessage, Label } from "./FormSelect.styled";
 import MenuItem from "@mui/material/MenuItem";
 import { SelectChangeEvent } from "@mui/material/Select";
-import { notify } from "../../../utils/helpers";
 
 interface IProps {
   name: string;
