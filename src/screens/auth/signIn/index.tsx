@@ -30,7 +30,7 @@ const SignIn = () => {
   });
 
   const handleSubmit = (values: any) => {
-    if (values.remember_me) {
+    if (values) {
       // const { password, ...rest } = values;
       localStorage.setItem("RememberMe", JSON.stringify(values));
     } else {
@@ -43,8 +43,6 @@ const SignIn = () => {
     );
   }
 
-
-  console.log(isSubmitting);
   useEffect(() => {
     let data = localStorage.getItem("RememberMe");
     const user: ILogin = data && JSON.parse(data);
@@ -72,7 +70,7 @@ const SignIn = () => {
           enableReinitialize
           initialValues={{
             email: state.email || "",
-            password: "",
+            password: state.password || "",
             remember_me: state.remember_me || false,
           }}
           validationSchema={formSchema}
