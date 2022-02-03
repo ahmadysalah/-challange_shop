@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const Select = styled(MUISelect)`
   border: 1px solid ${(props) => props.theme.palette.text.primary};
-  width: 90%;
+  width: 98%;
   padding-inline: 11px;
   height: 40px;
   border-radius: 6px;

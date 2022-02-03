@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Edit from "./Update";
 import { AppState } from "../../../redux/store";
 import { getAllUsers } from "../../../redux/actions/user.actions";
+import Loading from "../../../components/Loading";
 
 const columns: IColumn[] = [
   {
@@ -22,6 +23,8 @@ const columns: IColumn[] = [
   },
   {
     name: "isAdmin",
+    cellRenderer: (params) => `${params.data.isAdmin === true ? "Yes" : "No"}`,
+
   },
   {
     name: "dateOfBirth",
@@ -35,7 +38,7 @@ const columns: IColumn[] = [
 
 function Users() {
   const {
-    users: { allUsers },
+    users: { allUsers, loading },
   } = useSelector((state: AppState) => state);
 
   const dispatch = useDispatch();
@@ -53,14 +56,17 @@ function Users() {
         Users
       </Typography>
       <div style={{ width: "100%", margin: "auto" }}>
-        <Table
-          data={allUsers}
-          columns={columns}
-          frameworkComponents={{
-            ActionsRenderer: Edit,
-          }}
-          paginationPageSize={10}
-        />
+        {loading ? <Loading /> :
+
+          <Table
+            data={allUsers}
+            columns={columns}
+            frameworkComponents={{
+              ActionsRenderer: Edit,
+            }}
+            paginationPageSize={10}
+          />
+        }
       </div>
     </ContainerFull>
   );

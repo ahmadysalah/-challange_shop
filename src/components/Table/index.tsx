@@ -59,7 +59,7 @@ export default class Table<T> extends React.PureComponent<IProps<T>> {
         className="ag-theme-alpine"
         style={{
           marginTop: "1em",
-          height: "500px",
+          height: "520px",
         }}
       >
         <AgGridReact

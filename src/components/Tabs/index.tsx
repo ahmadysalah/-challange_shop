@@ -43,12 +43,10 @@ function a11yProps(index: number) {
 
 export default function VerticalTabs(props: VerticalTabsProps) {
   const { tabUser } = useParams()
-  console.log("tabUser", tabUser)
   const navigater = useNavigate()
 
   const memoizedValue = React.useMemo(() => routeTabNumber(tabUser || "me"), [tabUser])
   const [value, setValue] = React.useState(memoizedValue);
-  // const routeTabStr = (() => routeTabString(value || 0), [setValue, tabUser])
   // const memoizedCallback = React.useCallback(
   //   (value: number) => {
   //     return routeTabString(value)
@@ -60,9 +58,7 @@ export default function VerticalTabs(props: VerticalTabsProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tabUser]);
 
-  // routeTabString
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    // console.log("new value ", newValue);
 
     setValue(() => newValue);
 

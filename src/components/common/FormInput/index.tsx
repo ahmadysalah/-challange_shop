@@ -54,13 +54,15 @@ const FormInput = ({
                 style={{ width: "100%" }}
                 name={name}
                 onFocus={() => {
-                  form.getFieldHelpers(name).setTouched(true);
+                  // form.getFieldHelpers(name).setTouched(true);
                 }}
                 onChange={(e) => {
                   form.setFieldValue(name, e.target.value);
                 }}
                 onBlur={(e) => {
                   field.onBlur(e);
+                  form.getFieldHelpers(name).setTouched(true);
+
                 }}
                 value={field.value}
                 placeholder={placeholder}
@@ -110,13 +112,15 @@ const FormInput = ({
                   name={name}
                   type={type}
                   onFocus={() => {
-                    form.getFieldHelpers(name).setTouched(true);
+                    // form.getFieldHelpers(name).setTouched(true);
                   }}
                   onChange={(e) => {
                     form.setFieldValue(name, e.target.value);
                   }}
                   onBlur={(e) => {
                     field.onBlur(e);
+                    form.getFieldHelpers(name).setTouched(true);
+
                   }}
                   value={
                     type === "date" ? formatDate(field.value) : field.value
@@ -127,7 +131,7 @@ const FormInput = ({
             )}
           </div>
 
-          {submitted && meta.touched && meta.error
+          {(submitted || (meta.touched && meta.error))
             && (
               <ErrorMessage>{meta.error}</ErrorMessage>
             )}

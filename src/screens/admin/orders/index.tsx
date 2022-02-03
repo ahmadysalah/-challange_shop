@@ -18,6 +18,7 @@ import {
   getAllOrders,
 } from "../../../redux/actions/orders.actions";
 import { OrderDetails } from "./OrderDetails";
+import Loading from "../../../components/Loading";
 
 const columns: IColumn[] = [
   {
@@ -33,9 +34,13 @@ const columns: IColumn[] = [
   },
   {
     name: "isPaid",
+    cellRenderer: (params) => `${params.value ? "payed" : "Not  Yet"} `,
+
   },
   {
     name: "isDelivered",
+    cellRenderer: (params) => `${params.value ? "delivered" : "Not  Yet"} `,
+
   },
   { name: "Actions", cellRenderer: "ActionsRenderer" },
 ];
@@ -112,11 +117,14 @@ const Actions = (params: ICellRendererParams) => {
 };
 
 export default function AllOrdersProduct() {
-  const { allOrders } = useSelector((state: AppState) => state.orders);
+  const { allOrders, loading } = useSelector((state: AppState) => state.orders);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getAllOrders());
   }, [dispatch]);
+
+  console.log("loading", loading, allOrders);
 
   return (
     <div style={{ width: "100%", margin: "auto" }}>
@@ -132,13 +140,17 @@ export default function AllOrdersProduct() {
       >
         ALL ORDERS
       </Typography>
-      <Table
-        data={allOrders}
-        columns={columns}
-        frameworkComponents={{
-          ActionsRenderer: Actions,
-        }}
-      />
+      {!allOrders ? <Loading /> :
+        <Table
+          data={allOrders}
+          columns={columns}
+          frameworkComponents={{
+            ActionsRenderer: Actions,
+          }}
+        />
+
+      }
+
     </div>
   );
 }

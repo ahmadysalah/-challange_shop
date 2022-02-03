@@ -7,7 +7,14 @@ export const formSchema = yup.object().shape({
     .array()
     .of(yup.string())
     .min(1, "At least one category is required")
+    .max(4, "At Most Three category is required")
     .required("Product Categories is required"),
+    colors: yup
+    .array()
+    .of(yup.string())
+    .min(1, "At least one Color is required")
+    .max(4, "At Most Three Color is required")
+    .required("Product Color is required"),
   description: yup.string().required("Product Description is required"),
   countInStock: yup
     .number()
@@ -22,17 +29,20 @@ export const formSchema = yup.object().shape({
     .min(0)
     .required("Product discount is required")
     .typeError("Product discount is as number"),
-  images: yup.lazy((val) =>
+    images: yup.lazy((val) =>
     Array.isArray(val) && typeof val[0] === "string"
       ? yup
           .array()
           .of(yup.string())
           .min(1, "At least one image is required")
+          .max(4,"At Most Four image is required")
           .nullable()
       : yup
           .array()
           .of(yup.object())
           .min(1, "At least one image is required")
+          .max(4,"At Most Four image is required")
+
           .nullable()
   ),
 });
