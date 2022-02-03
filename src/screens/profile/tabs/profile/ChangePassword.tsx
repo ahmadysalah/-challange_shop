@@ -81,8 +81,8 @@ export default function ChangePassword({
           lastName: user.lastName,
           email: user.email,
           dateOfBirth: user.dateOfBirth,
-          password: userPass.password,
-          passwordConfirmation: userPass.password,
+          password: userPass?.password,
+          passwordConfirmation: userPass?.password,
         }}
         validationSchema={changeformSchema}
         onSubmit={handleSubmit}

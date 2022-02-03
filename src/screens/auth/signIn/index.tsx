@@ -30,7 +30,7 @@ const SignIn = () => {
   });
 
   const handleSubmit = (values: any) => {
-    if (values.remember_me) {
+    if (values) {
       // const { password, ...rest } = values;
       localStorage.setItem("RememberMe", JSON.stringify(values));
     } else {
