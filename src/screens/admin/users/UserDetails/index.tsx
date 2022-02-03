@@ -15,6 +15,7 @@ import { useParams, useNavigate } from "react-router";
 import { editUser, getUserByID } from "../../../../redux/actions/user.actions";
 import { notify } from "../../../../utils/helpers";
 import { CircularProgress } from "@mui/material";
+import Loading from "../../../../components/Loading";
 
 export default function UserDetails() {
   const theme = useTheme();
@@ -39,117 +40,118 @@ export default function UserDetails() {
   };
 
   return (
-    <Container>
-      <Typography variant="h2" color="text.primary">
-        Update User
-      </Typography>
-      <Formik
-        enableReinitialize
-        validationSchema={updateUserSchema}
-        onSubmit={handleSubmit}
-        initialValues={{
-          firstName: (user as IUserForm)?.firstName || "",
-          lastName: (user as IUserForm)?.lastName || "",
-          email: (user as IUserForm)?.email || "",
-          isAdmin: (user as IUserForm)?.isAdmin || false,
-          profileImage: (user as IUserForm)?.profileImage || "",
-          dateOfBirth: (user as IUserForm)?.dateOfBirth || "",
-        }}
-      >
-        {({ values, errors }) => (
-          <Form style={{ width: "100%" }}>
-            {console.log(errors, "errors")}
-            <Section style={{ padding: "30px", marginBlock: "15px" }}>
-              <Row justfiyContent="center" width="100%" gap="20px" wrap reverse>
-                <Column justfiyContent="flex-start" width="100%">
-                  <Column justfiyContent="flex-start" width="100%" gap="2em">
-                    <Row
-                      justfiyContent="flex-start"
-                      width="100%"
-                      gap="20%"
-                      wrap
-                    >
-                      <Column justfiyContent="flex-start" width="100%">
-                        <FormInput name="firstName" label="First name" />
-                      </Column>
-                      <Column justfiyContent="flex-start" width="100%">
-                        <FormInput name="lastName" label="Last name" />
-                      </Column>
-                    </Row>
-                    <Row
-                      justfiyContent="flex-start"
-                      width="100%"
-                      gap="20%"
-                      wrap
-                    >
-                      <Column justfiyContent="flex-start" width="100%">
-                        <FormInput name="email" label="Email" />
-                      </Column>
-                      <Column justfiyContent="flex-start" width="100%">
-                        <FormInput
-                          name="password"
-                          label="Password"
-                          type="password"
-                        />
-                      </Column>
-                    </Row>
-                    <Row
-                      justfiyContent="flex-start"
-                      width="100%"
-                      gap="20%"
-                      wrap
-                    >
-                      <Column justfiyContent="flex-start" width="100%">
-                        <FormInput
-                          name="dateOfBirth"
-                          label="Date Of Birth"
-                          type="date"
-                        />
-                      </Column>
-                      <Column justfiyContent="flex-start" width="100%">
-                        <FormInput
-                          name="isAdmin"
-                          label="Is Admin?"
-                          type="radio"
-                          firstValue={true}
-                          secondValue={false}
-                        />
-                      </Column>
-                    </Row>
+    !user ? <Loading /> :
+      <Container>
+        <Typography variant="h2" color="text.primary">
+          Update User
+        </Typography>
+        <Formik
+          enableReinitialize
+          validationSchema={updateUserSchema}
+          onSubmit={handleSubmit}
+          initialValues={{
+            firstName: (user as IUserForm)?.firstName || "",
+            lastName: (user as IUserForm)?.lastName || "",
+            email: (user as IUserForm)?.email || "",
+            isAdmin: (user as IUserForm)?.isAdmin || false,
+            profileImage: (user as IUserForm)?.profileImage || "",
+            dateOfBirth: (user as IUserForm)?.dateOfBirth || "",
+          }}
+        >
+          {({ values, errors }) => (
+            <Form style={{ width: "100%" }}>
+              {console.log(errors, "errors")}
+              <Section style={{ padding: "30px", marginBlock: "15px" }}>
+                <Row justfiyContent="center" width="100%" gap="20px" wrap reverse>
+                  <Column justfiyContent="flex-start" width="100%">
+                    <Column justfiyContent="flex-start" width="100%" gap="2em">
+                      <Row
+                        justfiyContent="flex-start"
+                        width="100%"
+                        gap="20%"
+                        wrap
+                      >
+                        <Column justfiyContent="flex-start" width="100%">
+                          <FormInput name="firstName" label="First name" />
+                        </Column>
+                        <Column justfiyContent="flex-start" width="100%">
+                          <FormInput name="lastName" label="Last name" />
+                        </Column>
+                      </Row>
+                      <Row
+                        justfiyContent="flex-start"
+                        width="100%"
+                        gap="20%"
+                        wrap
+                      >
+                        <Column justfiyContent="flex-start" width="100%">
+                          <FormInput name="email" label="Email" />
+                        </Column>
+                        <Column justfiyContent="flex-start" width="100%">
+                          <FormInput
+                            name="password"
+                            label="Password"
+                            type="password"
+                          />
+                        </Column>
+                      </Row>
+                      <Row
+                        justfiyContent="flex-start"
+                        width="100%"
+                        gap="20%"
+                        wrap
+                      >
+                        <Column justfiyContent="flex-start" width="100%">
+                          <FormInput
+                            name="dateOfBirth"
+                            label="Date Of Birth"
+                            type="date"
+                          />
+                        </Column>
+                        <Column justfiyContent="flex-start" width="100%">
+                          <FormInput
+                            name="isAdmin"
+                            label="Is Admin?"
+                            type="radio"
+                            firstValue={true}
+                            secondValue={false}
+                          />
+                        </Column>
+                      </Row>
+                    </Column>
                   </Column>
-                </Column>
+                </Row>
+              </Section>
+              <Row justfiyContent="flex-end" width="100%">
+                <Button
+                  type="submit"
+                  background={theme.palette.success.main}
+                  sx={{
+                    width: "fit-content",
+                    height: "fit-content",
+                    padding: "10px",
+                    [theme.breakpoints.down("md")]: {
+                      width: "100%",
+                    },
+                  }}
+                  disabled={loading}
+                >
+                  {!loading ? (
+                    <Typography
+                      variant="body2"
+                      color="#fff"
+                      sx={{ paddingInline: "2em", textTransform: "capitalize" }}
+                    >
+                      Updates
+                    </Typography>
+                  ) : (
+                    <CircularProgress size={20} color="inherit" />
+                  )}
+                </Button>
               </Row>
-            </Section>
-            <Row justfiyContent="flex-end" width="100%">
-              <Button
-                type="submit"
-                background={theme.palette.success.main}
-                sx={{
-                  width: "fit-content",
-                  height: "fit-content",
-                  padding: "10px",
-                  [theme.breakpoints.down("md")]: {
-                    width: "100%",
-                  },
-                }}
-                disabled={loading}
-              >
-                {!loading ? (
-                  <Typography
-                    variant="body2"
-                    color="#fff"
-                    sx={{ paddingInline: "2em", textTransform: "capitalize" }}
-                  >
-                    Updates
-                  </Typography>
-                ) : (
-                  <CircularProgress size={20} color="inherit" />
-                )}
-              </Button>
-            </Row>
-          </Form>
-        )}
-      </Formik>
-    </Container>
+            </Form>
+          )}
+        </Formik>
+      </Container>
   );
 }

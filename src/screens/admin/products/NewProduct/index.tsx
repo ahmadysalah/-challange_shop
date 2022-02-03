@@ -10,12 +10,13 @@ import {
 import { AppState } from "../../../../redux/store";
 import { Container } from "../Products.styled";
 import NewProductForm from "./Form";
+import Loading from "../../../../components/Loading";
 
 const CreateProduct = () => {
   const params = useParams();
   const dispatch = useDispatch();
 
-  const { product, categories } = useSelector(
+  const { loading, product, categories } = useSelector(
     (state: AppState) => state.products
   );
 
@@ -30,12 +31,13 @@ const CreateProduct = () => {
   }, []);
 
   return (
-    <Container>
-      <Typography variant="h2" color="text.primary">
-        {Boolean(params.id) ? "Update Product" : "Create New Product"}
-      </Typography>
-      <NewProductForm product={product} categories={categories} />
-    </Container>
+    loading ? <Loading /> :
+      <Container>
+        <Typography variant="h2" color="text.primary">
+          {Boolean(params.id) ? "Update Product" : "Create New Product"}
+        </Typography>
+        <NewProductForm product={product} categories={categories} />
+      </Container>
   );
 };
 
