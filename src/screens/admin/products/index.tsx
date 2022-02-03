@@ -53,7 +53,7 @@ const Products = () => {
       <Typography variant="h2" color="text.primary">
         Products
       </Typography>
-      {loading ? <Loading /> : <>
+      <>
         <Row justfiyContent="flex-end" width="100%">
           <Button
             disabled={loading}
@@ -87,7 +87,7 @@ const Products = () => {
 
           }
         </div>
-      </>}
+      </>
 
     </ContainerFull>
   );

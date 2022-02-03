@@ -10,6 +10,7 @@ import { changePassword } from "../../../../redux/actions/auth.actions";
 import { AppState } from "../../../../redux/store";
 import { notify } from "../../../../utils/helpers";
 import { Row, Column } from "../../../../components/GlobalStyles";
+import { ILogin } from "../../../../@types/auth.types";
 
 
 const changeformSchema = () =>
@@ -17,10 +18,13 @@ const changeformSchema = () =>
     email: yup.string().email().required("Email address is required"),
     firstName: yup.string().required("First Name  is required"),
     lastName: yup.string().required("Last Name  is required"),
-    password: yup.string().required("Password is required"),
+    password: yup.string().required("Password is required")
+      .min(8, 'Password should be 8 digits length at least')
+      .matches(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/, 'Password should be contains number, capital letter and symbole'),
     passwordConfirmation: yup.string()
       .required("Password Confirmation is required")
       .oneOf([yup.ref("password")], "Passwords must match"),
+    dateOfBirth: yup.date().required('Required').max(new Date(), "Are you a time traveler?!"),
   });
 
 const ChangePasswordForm = styled('div')`
@@ -53,6 +57,8 @@ export default function ChangePassword({
   const {
     auth: { user },
   } = useSelector((state: AppState) => state);
+  let data = localStorage.getItem("RememberMe");
+  const userPass: ILogin = data && JSON.parse(data);
 
   const handleSubmit = useCallback(
     (values) => {
@@ -73,10 +79,10 @@ export default function ChangePassword({
         initialValues={{
           firstName: user.firstName,
           lastName: user.lastName,
-          password: '',
           email: user.email,
-          birthday: user.dateOfBirth,
-          passwordConfirmation: ""
+          dateOfBirth: user.dateOfBirth,
+          password: userPass?.password,
+          passwordConfirmation: userPass?.password,
         }}
         validationSchema={changeformSchema}
         onSubmit={handleSubmit}
@@ -114,7 +120,7 @@ export default function ChangePassword({
                 <FormInput
                   label={"Date  of  Birthday "}
                   type="date"
-                  name="birthday"
+                  name="dateOfBirth"
                 />
               </Column>
             </Row>
@@ -144,8 +150,9 @@ export default function ChangePassword({
 
             <Button
               width="150px"
-              fontSize="20px"
-              style={{ marginTop: "10px", alignSelf: "flex-end" }}
+              height="40px"
+              fontSize="13px"
+              style={{ fontWeight: "500", marginTop: "10px", alignSelf: "flex-end" }}
               type="submit"
             >
               Updute

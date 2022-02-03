@@ -111,16 +111,15 @@ const FormInput = ({
                 <Input
                   name={name}
                   type={type}
-                  onFocus={() => {
-                    // form.getFieldHelpers(name).setTouched(true);
-                  }}
+                  // onFocus={() => {
+                  //   form.getFieldHelpers(name).setTouched(true);
+                  // }}
                   onChange={(e) => {
                     form.setFieldValue(name, e.target.value);
                   }}
                   onBlur={(e) => {
                     field.onBlur(e);
                     form.getFieldHelpers(name).setTouched(true);
-
                   }}
                   value={
                     type === "date" ? formatDate(field.value) : field.value
