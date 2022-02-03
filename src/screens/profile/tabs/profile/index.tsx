@@ -27,6 +27,8 @@ const Profile = ({ user, handleChange, file }: IProps) => {
   const handleClose = () => {
     setOpen(false);
   };
+
+
   return (
     <WrapperAvatar>
       <LeftSide>
